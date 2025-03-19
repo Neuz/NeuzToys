@@ -1,0 +1,26 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NeuzToys.Views.TitleBarLeftView"
+             xmlns:vm="clr-namespace:NeuzToys.ViewModels"
+             x:DataType="vm:TitleBarViewModel">
+    <Design.DataContext>
+        <vm:TitleBarViewModel />
+    </Design.DataContext>
+    <StackPanel Orientation="Horizontal">
+        <Image Classes="Tertiary"
+               Width="{StaticResource SemiWidthIconLarge}"
+               Height="{StaticResource SemiWidthIconLarge}"
+               Theme="{StaticResource BorderlessIconButton}"
+               Source="{Binding Icon}" />
+        <TextBlock VerticalAlignment="Center"
+                   Margin="8,0"
+                   FontWeight="Bold"
+                   Text="{Binding AppSettings.AppName}" />
+        <Label Theme="{StaticResource TagLabel}"
+               Classes="Purple"
+               Content="{Binding AppSettings.AppVersion}" />
+    </StackPanel>
+</UserControl>

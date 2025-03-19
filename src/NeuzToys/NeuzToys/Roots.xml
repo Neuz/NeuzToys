@@ -1,0 +1,5 @@
+﻿<linker>
+    <assembly fullname="NeuzToys.Desktop" preserve="All"/>
+    <assembly fullname="NeuzToys" preserve="All"/>
+    <assembly fullname="NeuzToys.Shared" preserve="All"/>
+</linker>

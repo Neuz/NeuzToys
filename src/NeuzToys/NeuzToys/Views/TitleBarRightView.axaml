@@ -1,0 +1,23 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="32"
+             x:Class="NeuzToys.Views.TitleBarRightView"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:vm="clr-namespace:NeuzToys.ViewModels"
+             x:DataType="vm:TitleBarViewModel">
+    <Design.DataContext>
+        <vm:TitleBarViewModel />
+    </Design.DataContext>
+    <StackPanel Orientation="Horizontal">
+        <u:IconButton IsVisible="{Binding TitleBarSettings.IsVisibleBtnGithub}"
+                      Command="{Binding OpenGithubCommand}"
+                      Classes="Tertiary"
+                      Theme="{StaticResource BorderlessIconButton}"
+                      Icon="{StaticResource SemiIconGithubLogo}" />
+        <u:ThemeToggleButton IsVisible="{Binding TitleBarSettings.IsVisibleBtnSystemTheme}"
+                             IsThreeState="False"
+                             Mode="Controller" />
+    </StackPanel>
+</UserControl>
