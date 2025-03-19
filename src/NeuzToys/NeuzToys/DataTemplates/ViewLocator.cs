@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using NeuzToys.Shared.Services;
+using NeuzToys.Shared.ViewModels;
 using NeuzToys.ViewModels;
 
 namespace NeuzToys.DataTemplates;

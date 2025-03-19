@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using NeuzToys.Shared.ViewModels;
 
 namespace NeuzToys.ViewModels;
 
-public partial class MainViewModel : ViewModelBase
+public class MainViewModel : ViewModelBase
 {
 }

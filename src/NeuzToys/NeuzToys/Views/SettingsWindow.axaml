@@ -1,9 +1,56 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="NeuzToys.Views.SettingsWindow"
-        Title="SettingsWindow">
-    Welcome to Avalonia!
-</Window>
+﻿<u:UrsaWindow xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="360"
+              x:Class="NeuzToys.Views.SettingsWindow"
+              xmlns:u="https://irihi.tech/ursa"
+              xmlns:vm="clr-namespace:NeuzToys.ViewModels"
+              x:DataType="vm:SettingsWindowViewModel"
+              WindowStartupLocation="CenterOwner"
+              IsMinimizeButtonVisible="False"
+              IsManagedResizerVisible="False"
+              Width="400" Height="360">
+    <Design.DataContext>
+        <vm:SettingsWindowViewModel />
+    </Design.DataContext>
+    <u:UrsaWindow.LeftContent>
+        <StackPanel Orientation="Horizontal">
+            <Image Classes="Tertiary"
+                   Width="{StaticResource SemiWidthIconLarge}"
+                   Height="{StaticResource SemiWidthIconLarge}"
+                   Theme="{StaticResource BorderlessIconButton}"
+                   Source="{Binding Icon}" />
+            <TextBlock VerticalAlignment="Center"
+                       Margin="8,0"
+                       FontWeight="Bold"
+                       Text="{Binding Title}" />
+        </StackPanel>
+    </u:UrsaWindow.LeftContent>
+    <TabControl Margin="8,28,0,8"
+                TabStripPlacement="Left"
+                Theme="{StaticResource ScrollTabControl}">
+        <TabItem Header="{Binding GeneralHeader}">
+            <TabItem.Content>
+                <Border HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Theme="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <CheckBox Content="最小化到系统托盘（未实现）" />
+                        <TextBlock Classes="Tertiary"
+                                   Text="点击关闭后最小化到系统托盘" />
+                    </StackPanel>
+                </Border>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem Header="{Binding AboutHeader}">
+            <TabItem.Content>
+                <Border HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Theme="{StaticResource CardBorder}">
+                    <TextBlock Text="{Binding AboutContent}" />
+                </Border>
+            </TabItem.Content>
+        </TabItem>
+    </TabControl>
+</u:UrsaWindow>

@@ -1,9 +1,45 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="NeuzToys.Views.WelcomeWindow"
-        Title="WelcomeWindow">
-    Welcome to Avalonia!
-</Window>
+﻿<u:SplashWindow xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d" d:DesignWidth="380" d:DesignHeight="160"
+                x:Class="NeuzToys.Views.WelcomeWindow"
+                xmlns:u="https://irihi.tech/ursa"
+                xmlns:vm="clr-namespace:NeuzToys.ViewModels"
+                x:DataType="vm:WelcomeWindowViewModel"
+                Title="WelcomeWindow"
+                Width="380" Height="160">
+    <Design.DataContext>
+        <vm:WelcomeWindowViewModel />
+    </Design.DataContext>
+    <Grid HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          ColumnDefinitions="Auto, Auto"
+          RowDefinitions="Auto, Auto, Auto">
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Width="64"
+                   Margin="0,0,16,0"
+                   Background="Aqua"
+                   Text="" />
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Classes="H2"
+                       Text="{Binding Settings.Title}"
+                       Theme="{DynamicResource TitleTextBlock}" />
+            <TextBlock FontWeight="Bold" Text="{Binding Settings.SubTitle}" />
+        </StackPanel>
+        <ProgressBar Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Margin="0,16,0,0"
+                     Value="{Binding Progress}" />
+        <StackPanel Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+            <TextBlock Margin="0,12,0,0"
+                       HorizontalAlignment="Center"
+                       FontSize="12"
+                       Text="{Binding Settings.LoadingText}" />
+        </StackPanel>
+    </Grid>
+</u:SplashWindow>

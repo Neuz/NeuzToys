@@ -2,7 +2,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="NeuzToys.Views.MenuView">
-    Welcome to Avalonia!
+             mc:Ignorable="d" d:DesignWidth="180" d:DesignHeight="300"
+             x:Class="NeuzToys.Views.MenuView"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:vm="clr-namespace:NeuzToys.ViewModels"
+             xmlns:converters="clr-namespace:NeuzToys.Converters"
+             xmlns:models="clr-namespace:NeuzToys.Shared.Models;assembly=NeuzToys.Shared"
+             x:DataType="vm:MenuViewModel">
+    <Design.DataContext>
+        <vm:MenuViewModel />
+    </Design.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:IconConverter x:Key="IconConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <u:NavMenu Name="menu"
+               ExpandWidth="180"
+               Padding="{StaticResource SemiThicknessTight}"
+               IsHorizontalCollapsed="{Binding #collapse.IsChecked, Mode=OneWay}"
+               ItemsSource="{Binding MenuItems}"
+               HeaderBinding="{Binding Name}"
+               IconBinding="{Binding Icon}"
+               SubMenuBinding="{Binding Children}"
+               CommandBinding="{Binding ActivateCommand}">
+        <u:NavMenu.IconTemplate>
+            <DataTemplate DataType="{x:Type x:String}">
+                <u:TwoTonePathIcon
+                    Width="16"
+                    Height="16"
+                    ActiveForeground="{DynamicResource SemiBlue5}"
+                    ActiveStrokeBrush="{DynamicResource SemiBlue5}"
+                    Foreground="{DynamicResource SemiGrey5}"
+                    StrokeBrush="{DynamicResource SemiGrey5}"
+                    IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
+                    Data="{Binding Converter={StaticResource IconConverter}}" />
+            </DataTemplate>
+        </u:NavMenu.IconTemplate>
+        <u:NavMenu.HeaderTemplate>
+            <DataTemplate x:DataType="models:MenuItem">
+                <StackPanel Orientation="Horizontal" Spacing="{StaticResource SemiSpacingExtraTight}">
+                    <TextBlock HorizontalAlignment="Right" FontSize="18" Text="{Binding Name}" />
+                </StackPanel>
+            </DataTemplate>
+        </u:NavMenu.HeaderTemplate>
+        <u:NavMenu.Footer>
+            <StackPanel>
+                <ToggleSwitch
+                    Name="collapse"
+                    Padding="0"
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource ButtonToggleSwitch}"
+                    Foreground="{DynamicResource ButtonDefaultTertiaryForeground}">
+                    <ToggleSwitch.Content>
+                        <Border Margin="6">
+                            <PathIcon
+                                Foreground="{DynamicResource SemiGrey5}"
+                                Height="{StaticResource IconElementThemeHeight}"
+                                Width="{StaticResource IconElementThemeHeight}"
+                                Theme="{DynamicResource InnerPathIcon}"
+                                Data="{StaticResource SemiIconSidebar}" />
+                        </Border>
+                    </ToggleSwitch.Content>
+                </ToggleSwitch>
+                <u:IconButton HorizontalAlignment="Left"
+                              Classes="Tertiary"
+                              Foreground="{DynamicResource SemiGrey5}"
+                              Icon="{StaticResource SemiIconSetting}"
+                              RenderTransform="{x:Null}"
+                              Theme="{DynamicResource BorderlessIconButton}"
+                              Command="{Binding SettingsWindowShowDialogCommand}">
+                </u:IconButton>
+            </StackPanel>
+        </u:NavMenu.Footer>
+    </u:NavMenu>
 </UserControl>

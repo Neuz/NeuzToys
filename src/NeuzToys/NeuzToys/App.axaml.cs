@@ -6,6 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using NeuzToys.Services;
 using NeuzToys.Shared.Extensions;
 using NeuzToys.Shared.Services;
 using NeuzToys.ViewModels;
@@ -33,22 +34,24 @@ public class App : Application
 
         #endregion
 
+        var mainWindow = new MainWindow { DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>() };
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>()
-            };
+
+            var appService = Ioc.Default.GetRequiredService<AppService>();
+            
+            // 是否启用Welcome窗体
+            desktop.MainWindow = appService.AppSettings.IsVisibleWelcomeWindow
+                ? new WelcomeWindow(mainWindow)
+                    { DataContext = Ioc.Default.GetRequiredService<WelcomeWindowViewModel>() }
+                : mainWindow;
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
-            {
-                DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>()
-            };
+            singleViewPlatform.MainView = mainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();
