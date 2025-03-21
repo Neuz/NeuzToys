@@ -26,6 +26,20 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\NeuzToys.Modules.WinOptimizer\NeuzToys.Modules.WinOptimizer.csproj" />
         <ProjectReference Include="..\NeuzToys.Shared\NeuzToys.Shared.csproj"/>
+    </ItemGroup>
+
+
+    <!-- 热加载相关配置-->
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <!-- If you're a .vbproj user, replace ';' with ',' -->
+        <DefineConstants>$(DefineConstants);ENABLE_XAML_HOT_RELOAD</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader" Version="11.2.5" />
+        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia" Version="2.1.0" />
+        <PackageReference Include="HotAvalonia.Extensions" Version="2.1.0" PrivateAssets="All" />
     </ItemGroup>
 </Project>

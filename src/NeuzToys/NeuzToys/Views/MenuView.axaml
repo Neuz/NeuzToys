@@ -14,11 +14,11 @@
     </Design.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:IconConverter x:Key="IconConverter" />
+            <converters:IconKey2GeometryConverter x:Key="IconConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <u:NavMenu Name="menu"
-               ExpandWidth="180"
+               ExpandWidth="150"
                Padding="{StaticResource SemiThicknessTight}"
                IsHorizontalCollapsed="{Binding #collapse.IsChecked, Mode=OneWay}"
                ItemsSource="{Binding MenuItems}"

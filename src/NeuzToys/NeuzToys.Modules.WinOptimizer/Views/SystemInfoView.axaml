@@ -1,0 +1,424 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NeuzToys.Modules.WinOptimizer.Views.SystemInfoView"
+             xmlns:vm="clr-namespace:NeuzToys.Modules.WinOptimizer.ViewModels"
+             x:DataType="vm:SystemInfoViewModel"
+             xmlns:u="https://irihi.tech/ursa">
+    <Design.DataContext>
+        <vm:SystemInfoViewModel />
+    </Design.DataContext>
+    <UserControl.Styles>
+        <!-- Header 模块背景色 -->
+        <Style Selector="Grid.Header > StackPanel">
+            <Setter Property="Background" Value="{DynamicResource SemiColorInformationLight}" />
+            <Setter Property="Margin" Value="0,0,0,10"></Setter>
+        </Style>
+        <!-- Header 模块 文字 -->
+        <Style Selector="Grid.Header  TextBlock.H3">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Theme" Value="{StaticResource TitleTextBlock}" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+        </Style>
+        <!-- Header 模块 文字 -->
+        <Style Selector="Grid.Header  TextBlock.H8">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Theme" Value="{StaticResource TitleTextBlock}" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+        </Style>
+        <!-- 折叠快 Header -->
+        <Style Selector="TextBlock.ExpanderHeader">
+            <Setter Property="FontSize" Value="{StaticResource SemiFontSizeHeader6}" />
+        </Style>
+        <Style Selector="PathIcon.ExpanderHeader">
+            <Setter Property="Width" Value="{StaticResource SemiWidthIconMedium}" />
+            <Setter Property="Height" Value="{StaticResource SemiWidthIconMedium}" />
+            <Setter Property="Margin" Value="8,0" />
+        </Style>
+        <!-- 折叠 内容 -->
+        <Style Selector="Grid.ExpanderContent > TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="6,0,0,0" />
+            <Setter Property="FontSize" Value="{StaticResource SemiFontSizeRegular}" />
+        </Style>
+        <Style Selector="Grid.ExpanderContent > SelectableTextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="32,0,0,0" />
+            <Setter Property="FontSize" Value="{StaticResource SemiFontSizeSmall}" />
+        </Style>
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,*" Classes="Header">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Classes="H3" Text="系统优化" />
+            <TextBlock Classes="H8" Text=" > " />
+            <TextBlock Classes="H3" Text="系统信息" />
+        </StackPanel>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right">
+            <u:IconButton Icon="{StaticResource MaterialDesign-Reload}"
+                          Command="{Binding ReloadCommand}" />
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" 
+                      HorizontalScrollBarVisibility="Disabled" 
+                      VerticalScrollBarVisibility="Auto">
+            <u:LoadingContainer IsLoading="{Binding Loading}"
+                                LoadingMessage="加载中..."
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch">
+                <StackPanel>
+                    <!-- SystemInfo -->
+                    <Expander IsExpanded="True">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader"
+                                              Data="{StaticResource  MaterialDesign-Windows}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="操作系统" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <Border Theme="{StaticResource CardBorder}"
+                                    Width="600">
+                                <Grid ColumnDefinitions="Auto, *"
+                                      RowDefinitions="*,*,*,*,*,*,*,*,*"
+                                      Classes="ExpanderContent">
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="操作系统名称" />
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="版本" />
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="内部版本号" />
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="架构" />
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="安装日期" />
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="已注册用户" />
+                                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Windows目录" />
+                                    <TextBlock Grid.Row="7" Grid.Column="0" Text="系统目录目录" />
+                                    <TextBlock Grid.Row="8" Grid.Column="0" Text="最后启动时间" />
+                                    <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                         Text="{Binding OsInfo.OSName}" />
+                                    <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                         Text="{Binding OsInfo.OSVersion}" />
+                                    <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                         Text="{Binding OsInfo.BuildNumber}" />
+                                    <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                         Text="{Binding OsInfo.Architecture}" />
+                                    <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                         Text="{Binding OsInfo.InstallDate}" />
+                                    <SelectableTextBlock Grid.Row="5" Grid.Column="1"
+                                                         Text="{Binding OsInfo.RegisteredUser}" />
+                                    <SelectableTextBlock Grid.Row="6" Grid.Column="1"
+                                                         Text="{Binding OsInfo.WindowsDirectory}" />
+                                    <SelectableTextBlock Grid.Row="7" Grid.Column="1"
+                                                         Text="{Binding OsInfo.SystemDirectory}" />
+                                    <SelectableTextBlock Grid.Row="8" Grid.Column="1"
+                                                         Text="{Binding OsInfo.LastBootUpTime}" />
+                                </Grid>
+                            </Border>
+                        </Expander.Content>
+                    </Expander>
+                    <!-- Cpu -->
+                    <Expander IsExpanded="False">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader" Data="{StaticResource  HeroIcons-Cpu}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="处理器" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <ItemsControl ItemsSource="{Binding CpuInfos}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Theme="{StaticResource CardBorder}"
+                                                Width="600">
+                                            <Grid ColumnDefinitions="Auto, *"
+                                                  RowDefinitions="*,*,*,*,*,*,*,*,*,*"
+                                                  Classes="ExpanderContent">
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="编号" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="名称" />
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="制造商" />
+                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="架构" />
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="核心" />
+                                                <TextBlock Grid.Row="5" Grid.Column="0" Text="逻辑处理器" />
+                                                <TextBlock Grid.Row="6" Grid.Column="0" Text="最大速度" />
+                                                <TextBlock Grid.Row="7" Grid.Column="0" Text="插槽指定" />
+                                                <TextBlock Grid.Row="8" Grid.Column="0" Text="二级缓存大小" />
+                                                <TextBlock Grid.Row="9" Grid.Column="0" Text="三级缓存大小" />
+
+                                                <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                                     Text="{Binding Number}" />
+                                                <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                                     Text="{Binding Name}" />
+                                                <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                                     Text="{Binding Manufacturer}" />
+                                                <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                                     Text="{Binding Architecture}" />
+                                                <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                                     Text="{Binding Cores}" />
+                                                <SelectableTextBlock Grid.Row="5" Grid.Column="1"
+                                                                     Text="{Binding LogicalProcessors}" />
+                                                <SelectableTextBlock Grid.Row="6" Grid.Column="1"
+                                                                     Text="{Binding MaxSpeed}" />
+                                                <SelectableTextBlock Grid.Row="7" Grid.Column="1"
+                                                                     Text="{Binding SocketDesignation}" />
+                                                <SelectableTextBlock Grid.Row="8" Grid.Column="1"
+                                                                     Text="{Binding L2Cache}" />
+                                                <SelectableTextBlock Grid.Row="9" Grid.Column="1"
+                                                                     Text="{Binding L3Cache}" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander.Content>
+                    </Expander>
+                    <!-- Gpu -->
+                    <Expander IsExpanded="False">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader" Data="{StaticResource  MaterialDesign-Gpu}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="显卡" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <ItemsControl ItemsSource="{Binding GpuInfos}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Theme="{StaticResource CardBorder}"
+                                                Width="600">
+                                            <Grid ColumnDefinitions="Auto, *"
+                                                  RowDefinitions="*,*,*,*,*"
+                                                  Classes="ExpanderContent">
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="编号" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="名称" />
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="适配器内存" />
+                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="驱动版本" />
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="视频架构" />
+
+                                                <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                                     Text="{Binding Number}" />
+                                                <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                                     Text="{Binding Caption}" />
+                                                <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                                     Text="{Binding AdapterRAM}" />
+                                                <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                                     Text="{Binding DriverVersion}" />
+                                                <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                                     Text="{Binding VideoArchitecture}" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander.Content>
+                    </Expander>
+                    <!-- Mem -->
+                    <Expander IsExpanded="False">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader" Data="{StaticResource  Clarity-Memory}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="内存" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <ItemsControl ItemsSource="{Binding MemInfos}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Theme="{StaticResource CardBorder}"
+                                                Width="600">
+                                            <Grid ColumnDefinitions="Auto, *"
+                                                  RowDefinitions="*,*,*,*,*"
+                                                  Classes="ExpanderContent">
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="编号" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="设备定位器" />
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="容量" />
+                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="速度" />
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="制造商" />
+
+                                                <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                                     Text="{Binding Number}" />
+                                                <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                                     Text="{Binding DeviceLocator}" />
+                                                <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                                     Text="{Binding Capacity}" />
+                                                <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                                     Text="{Binding Speed}" />
+                                                <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                                     Text="{Binding Manufacturer}" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander.Content>
+                    </Expander>
+                    <!-- Disk -->
+                    <Expander IsExpanded="False">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader"
+                                              Data="{StaticResource  MaterialDesign-TypeDrive}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="磁盘" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <ItemsControl ItemsSource="{Binding DiskInfos}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Theme="{StaticResource CardBorder}"
+                                                Width="600">
+                                            <Grid ColumnDefinitions="Auto, *"
+                                                  RowDefinitions="*,*,*,*,*,*"
+                                                  Classes="ExpanderContent">
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="编号" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="名称" />
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="大小" />
+                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="接口类型" />
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="制造商" />
+                                                <TextBlock Grid.Row="5" Grid.Column="0" Text="型号" />
+
+                                                <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                                     Text="{Binding Number}" />
+                                                <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                                     Text="{Binding Caption}" />
+                                                <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                                     Text="{Binding Size}" />
+                                                <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                                     Text="{Binding InterfaceType}" />
+                                                <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                                     Text="{Binding Manufacturer}" />
+                                                <SelectableTextBlock Grid.Row="5" Grid.Column="1"
+                                                                     Text="{Binding Model}" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander.Content>
+                    </Expander>
+                    <!-- Network -->
+                    <Expander IsExpanded="False">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader"
+                                              Data="{StaticResource  MaterialDesign-LocalAreaNetwork}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="网络适配器" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <ItemsControl ItemsSource="{Binding NetworkInfos}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Theme="{StaticResource CardBorder}"
+                                                Width="600">
+                                            <Grid ColumnDefinitions="Auto, *"
+                                                  RowDefinitions="*,*,*,*,*"
+                                                  Classes="ExpanderContent">
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="编号" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="名称" />
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="MAC 地址" />
+                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="速度" />
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="适配器类型" />
+
+                                                <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                                     Text="{Binding Number}" />
+                                                <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                                     Text="{Binding Name}" />
+                                                <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                                     Text="{Binding MACAddress}" />
+                                                <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                                     Text="{Binding Speed}" />
+                                                <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                                     Text="{Binding AdapterType}" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander.Content>
+                    </Expander>
+                    <!-- Battery -->
+                    <Expander IsExpanded="False">
+                        <Expander.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <PathIcon Classes="ExpanderHeader" Data="{StaticResource  MaterialDesign-Battery}" />
+                                    <TextBlock Classes="ExpanderHeader" Text="电池" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Expander.HeaderTemplate>
+                        <Expander.Content>
+                            <ItemsControl ItemsSource="{Binding BatteryInfos}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Theme="{StaticResource CardBorder}"
+                                                Width="600">
+                                            <Grid ColumnDefinitions="Auto, *"
+                                                  RowDefinitions="*,*,*,*,*"
+                                                  Classes="ExpanderContent">
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="编号" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="名称" />
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="预计剩余电量" />
+                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="电池状态" />
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="化学成分" />
+
+                                                <SelectableTextBlock Grid.Row="0" Grid.Column="1"
+                                                                     Text="{Binding Number}" />
+                                                <SelectableTextBlock Grid.Row="1" Grid.Column="1"
+                                                                     Text="{Binding Name}" />
+                                                <SelectableTextBlock Grid.Row="2" Grid.Column="1"
+                                                                     Text="{Binding EstimatedChargeRemaining}" />
+                                                <SelectableTextBlock Grid.Row="3" Grid.Column="1"
+                                                                     Text="{Binding BatteryStatus}" />
+                                                <SelectableTextBlock Grid.Row="4" Grid.Column="1"
+                                                                     Text="{Binding Chemistry}" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander.Content>
+                    </Expander>
+                </StackPanel>
+            </u:LoadingContainer>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

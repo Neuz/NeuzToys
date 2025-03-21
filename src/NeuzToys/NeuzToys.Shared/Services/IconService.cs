@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Semi.Avalonia;
 
 namespace NeuzToys.Shared.Services;
 
@@ -11,7 +10,7 @@ public class IconService
     
     public IconService()
     {
-        foreach (var provider in new Icons().MergedDictionaries)
+        foreach (var provider in new NeuzIcons().MergedDictionaries)
         {
             if (provider is not ResourceDictionary dict) continue;
             foreach (var key in dict.Keys)

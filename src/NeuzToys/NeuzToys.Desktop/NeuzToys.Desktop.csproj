@@ -24,4 +24,5 @@
     <ItemGroup>
         <ProjectReference Include="..\NeuzToys\NeuzToys.csproj"/>
     </ItemGroup>
+
 </Project>

@@ -7,7 +7,10 @@ using NeuzToys.Shared.Services;
 
 namespace NeuzToys.Converters;
 
-public class IconConverter:IValueConverter
+/// <summary>
+/// IconKey -> Geometry
+/// </summary>
+public class IconKey2GeometryConverter:IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

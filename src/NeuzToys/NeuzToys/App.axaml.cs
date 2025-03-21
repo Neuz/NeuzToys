@@ -5,7 +5,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using HotAvalonia;
 using Microsoft.Extensions.DependencyInjection;
+using NeuzToys.Modules.WinOptimizer;
 using NeuzToys.Services;
 using NeuzToys.Shared.Extensions;
 using NeuzToys.Shared.Services;
@@ -18,6 +20,7 @@ public class App : Application
 {
     public override void Initialize()
     {
+        this.EnableHotReload(); // 开发时热加载扩展
         AvaloniaXamlLoader.Load(this);
     }
 
@@ -27,7 +30,9 @@ public class App : Application
 
         var menuService = new MenuService();
         var provider = new ServiceCollection()
-            .InitModule<MainModule>(menuService)
+            .AddSingleton(menuService)
+            .InitModule<BaseModule>(menuService)
+            .InitModule<WinOptimizerModule>(menuService)
             .BuildServiceProvider();
 
         Ioc.Default.ConfigureServices(provider);

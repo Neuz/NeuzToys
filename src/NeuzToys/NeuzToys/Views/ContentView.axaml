@@ -3,6 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="NeuzToys.Views.ContentView">
-    Welcome to Avalonia!
+             x:Class="NeuzToys.Views.ContentView"
+             xmlns:vm="clr-namespace:NeuzToys.ViewModels"
+             xmlns:dt="clr-namespace:NeuzToys.DataTemplates"
+             x:DataType="vm:ContentViewModel">
+    <ContentControl Content="{Binding Content}">
+        <ContentControl.ContentTemplate>
+            <dt:ViewLocator />
+        </ContentControl.ContentTemplate>
+    </ContentControl>
 </UserControl>

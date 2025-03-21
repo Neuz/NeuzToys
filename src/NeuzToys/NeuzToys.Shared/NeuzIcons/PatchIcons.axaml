@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- HeroIcons -->
+    <!-- https://icon-sets.iconify.design/heroicons/ -->
+    <StreamGeometry x:Key="HeroIcons-Cpu">
+        M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75M6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75z
+    </StreamGeometry>
+    <!-- simple icons -->
+    <!-- https://simpleicons.org/ -->
+    <StreamGeometry x:Key="SimpleIcons-DotNet">
+        M24 8.77h-2.468v7.565h-1.425V8.77h-2.462V7.53H24zm-6.852 7.565h-4.821V7.53h4.63v1.24h-3.205v2.494h2.953v1.234h-2.953v2.604h3.396zm-6.708 0H8.882L4.78 9.863a2.896 2.896 0 0 1-.258-.51h-.036c.032.189.048.592.048 1.21v5.772H3.157V7.53h1.659l3.965 6.32c.167.261.275.442.323.54h.024c-.04-.233-.06-.629-.06-1.185V7.529h1.372zm-8.703-.693a.868.829 0 0 1-.869.829.868.829 0 0 1-.868-.83.868.829 0 0 1 .868-.828.868.829 0 0 1 .869.829Z
+    </StreamGeometry>
+    <!-- Clarity  by VMware-->
+    <!-- https://icon-sets.iconify.design/clarity/ -->
+    <StreamGeometry x:Key="Clarity-Memory">
+        M34 13V9a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4h2v4H2v10a2 2 0 0 0 2 2h12.61v-3.45H19V29h13a2 2 0 0 0 2-2V17h-2v-4Zm-22 7H8v-8h4Zm8 0h-4v-8h4Zm8 0h-4v-8h4Z
+    </StreamGeometry>
+    <!-- MingCute  -->
+    <!-- https://icon-sets.iconify.design/mingcute/ -->
+    <StreamGeometry x:Key="MingCute-Performance-Fill">
+        M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm10.939 2.655c-.353-.883-1.618-.833-1.902.074l-1.752 5.606l-.388-.777A1.01 1.01 0 0 0 8.994 12H7a1 1 0 1 0 0 2h1.382l1.212 2.425c.407.813 1.597.717 1.868-.15l1.654-5.293l.953 2.383c.153.384.525.635.938.635H17a1 1 0 1 0 0-2h-1.323z
+    </StreamGeometry>
+</ResourceDictionary>

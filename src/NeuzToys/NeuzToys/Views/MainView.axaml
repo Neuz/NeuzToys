@@ -17,17 +17,16 @@
             </Style>
         </Panel.Styles>
         <Grid ColumnDefinitions="Auto, *">
-            <Border Padding="8,0"
+            <Border Theme="{DynamicResource CardBorder}"
                     VerticalAlignment="Stretch"
-                    Theme="{DynamicResource CardBorder}">
+                    Padding="0">
                 <view:MenuView />
             </Border>
             <Border Grid.Column="1"
-                    Padding="8,0"
-                    HorizontalAlignment="Stretch"
+                    Theme="{DynamicResource CardBorder}"
                     VerticalAlignment="Stretch"
-                    Theme="{DynamicResource CardBorder}">
-                <!-- <view:ContentView /> -->
+                    Padding="0">
+                <view:ContentView />
             </Border>
         </Grid>
     </Panel>
