@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NeuzToys.Shared\NeuzToys.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Management" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Ursa">
+        <HintPath>..\..\..\..\..\..\..\.nuget\packages\irihi.ursa\1.9.0\lib\net8.0\Ursa.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
