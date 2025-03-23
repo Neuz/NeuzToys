@@ -10,6 +10,7 @@ using NeuzToys.Modules.WinOptimizer.Services;
 using NeuzToys.Shared;
 using NeuzToys.Shared.Services;
 using NeuzToys.Shared.ViewModels;
+using Serilog;
 
 namespace NeuzToys.Modules.WinOptimizer.ViewModels;
 
@@ -35,7 +36,7 @@ public partial class SystemInfoViewModel : ViewModelBase
 
 
     [RelayCommand]
-    private async void Reload()
+    private async Task Reload()
     {
         Loading = true;
         await Task.Run(async () =>

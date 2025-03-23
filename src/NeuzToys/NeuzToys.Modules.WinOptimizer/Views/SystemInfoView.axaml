@@ -14,7 +14,7 @@
         <!-- Header 模块背景色 -->
         <Style Selector="Grid.Header > StackPanel">
             <Setter Property="Background" Value="{DynamicResource SemiColorInformationLight}" />
-            <Setter Property="Margin" Value="0,0,0,10"></Setter>
+            <Setter Property="Margin" Value="0,0,0,10" />
         </Style>
         <!-- Header 模块 文字 -->
         <Style Selector="Grid.Header  TextBlock.H3">

@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
@@ -7,12 +9,15 @@ using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using HotAvalonia;
 using Microsoft.Extensions.DependencyInjection;
+using NeuzToys.Models;
 using NeuzToys.Modules.WinOptimizer;
 using NeuzToys.Services;
 using NeuzToys.Shared.Extensions;
 using NeuzToys.Shared.Services;
 using NeuzToys.ViewModels;
 using NeuzToys.Views;
+using Serilog;
+using Serilog.Events;
 
 namespace NeuzToys;
 
@@ -39,15 +44,41 @@ public class App : Application
 
         #endregion
 
+
         var mainWindow = new MainWindow { DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>() };
-        
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
 
             var appService = Ioc.Default.GetRequiredService<AppService>();
-            
+
+            #region 日志
+
+            var loggerSettings = appService.AppSettings.LoggerSettings;
+            var path = Path.Combine(loggerSettings.LogFilePath, "log.log");
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.File(path: path,
+                    shared: true,
+                    rollingInterval: RollingInterval.Day,
+                    outputTemplate: loggerSettings.OutputTemplate)
+                .CreateLogger();
+
+            // 订阅未处理异常
+            AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+                Log.Write(LogEventLevel.Error, (Exception)e.ExceptionObject, "Unhandled exception");
+            TaskScheduler.UnobservedTaskException += (s, e) =>
+                Log.Write(LogEventLevel.Error, e.Exception, "Unobserved task exception");
+
+            desktop.Startup += (s, e) => Log.Information("启动");
+            desktop.Exit += (s, e) => Log.Information("关闭");
+
+            #endregion
+
             // 是否启用Welcome窗体
             desktop.MainWindow = appService.AppSettings.IsVisibleWelcomeWindow
                 ? new WelcomeWindow(mainWindow)

@@ -23,6 +23,7 @@
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
         <PackageReference Include="Semi.Avalonia"/>
+        <PackageReference Include="Serilog.Sinks.File" />
     </ItemGroup>
 
     <ItemGroup>

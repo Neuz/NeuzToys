@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json.Serialization;
 
 namespace NeuzToys.Models;
 
@@ -8,8 +10,35 @@ public class AppSettings
     public string AppVersion { get; set; } = "0.0.1";
     public bool IsVisibleWelcomeWindow { get; set; } = true;
     
+    
+    public LoggerSettings LoggerSettings { get; set; } = new();
+    
+    public ConfigSettings ConfigSettings { get; set; } = new();
     public WelcomeSettings WelcomeSettings { get; set; } = new();
     public TitleBarSettings TitleBarSettings { get; set; } = new();
+}
+
+public class ConfigSettings
+{
+    [JsonIgnore]
+    public string ConfigFile { get; set; } =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NeuzToys",
+            "app.cfg");
+    
+    /// <summary>
+    /// 是否最小化到托盘
+    /// </summary>
+    public bool IsHideToTray { get; set; }
+    
+}
+
+public class LoggerSettings
+{
+    public string LogFilePath { get; set; } =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NeuzToys", "Logs");
+
+    public string OutputTemplate { get; set; } =
+        "[{Level:u3}] [{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Message:lj}{NewLine}{Exception}";
 }
 
 public class WelcomeSettings

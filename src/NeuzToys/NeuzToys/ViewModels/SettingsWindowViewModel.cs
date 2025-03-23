@@ -1,18 +1,30 @@
-﻿using Avalonia.Media.Imaging;
+﻿using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Input;
 using NeuzToys.Models;
 using NeuzToys.Services;
 using NeuzToys.Shared.ViewModels;
 
 namespace NeuzToys.ViewModels;
 
-public class SettingsWindowViewModel:ViewModelBase
+public partial class SettingsWindowViewModel:ViewModelBase
 {
     private readonly AppService _appService = Ioc.Default.GetRequiredService<AppService>();
     public Bitmap Icon => _appService.AssertLoadBitmap("avares://NeuzToys/Assets/logo.ico");
-    public string Title => "设置";
 
-    public string GeneralHeader => "通用设置";
-    public string AboutHeader => "关于";
-    public string AboutContent => "这里是关于";
+    public bool IsHideToTray => _appService.AppSettings.ConfigSettings.IsHideToTray;
+
+    public SettingsWindowViewModel()
+    {
+    }
+
+    [RelayCommand]
+    private async Task SetIsHideToTray(bool value)
+    {
+        _appService.AppSettings.ConfigSettings.IsHideToTray = value;
+        await _appService.SaveConfigAsync();
+    }
+
 }

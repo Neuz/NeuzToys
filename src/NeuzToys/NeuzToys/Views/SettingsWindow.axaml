@@ -24,31 +24,35 @@
             <TextBlock VerticalAlignment="Center"
                        Margin="8,0"
                        FontWeight="Bold"
-                       Text="{Binding Title}" />
+                       Text="设置" />
         </StackPanel>
     </u:UrsaWindow.LeftContent>
     <TabControl Margin="8,28,0,8"
                 TabStripPlacement="Left"
                 Theme="{StaticResource ScrollTabControl}">
-        <TabItem Header="{Binding GeneralHeader}">
+        <TabItem Header="通用设置">
             <TabItem.Content>
                 <Border HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Theme="{StaticResource CardBorder}">
                     <StackPanel>
-                        <CheckBox Content="最小化到系统托盘（未实现）" />
+                        <CheckBox Name="isHideToTray"
+                                  Content="最小化到系统托盘（未实现）"
+                                  IsChecked="{Binding IsHideToTray}"
+                                  Command="{Binding SetIsHideToTrayCommand}"
+                                  CommandParameter="{Binding #isHideToTray.IsChecked}" />
                         <TextBlock Classes="Tertiary"
                                    Text="点击关闭后最小化到系统托盘" />
                     </StackPanel>
                 </Border>
             </TabItem.Content>
         </TabItem>
-        <TabItem Header="{Binding AboutHeader}">
+        <TabItem Header="关于">
             <TabItem.Content>
                 <Border HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Theme="{StaticResource CardBorder}">
-                    <TextBlock Text="{Binding AboutContent}" />
+                    <TextBlock Text="这里是关于" />
                 </Border>
             </TabItem.Content>
         </TabItem>

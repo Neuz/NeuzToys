@@ -4,6 +4,7 @@ using System.Linq;
 using System.Management;
 using System.Threading.Tasks;
 using NeuzToys.Modules.WinOptimizer.Models;
+using Serilog;
 
 // ReSharper disable InconsistentNaming
 
@@ -11,13 +12,40 @@ namespace NeuzToys.Modules.WinOptimizer.Services;
 
 public class WmiService
 {
-    public async Task<IEnumerable<OSInformation>> GetOSInformationAsync() => await Task.Run(GetOSInformation);
-    public async Task<IEnumerable<CpuInformation>> GetCpuInformationAsync() => await Task.Run(GetCpuInformation);
-    public async Task<IEnumerable<GpuInformation>> GetGpuInformationAsync() => await Task.Run(GetGpuInformation);
-    public async Task<IEnumerable<MemoryInformation>> GetMemoryInformationAsync() => await Task.Run(GetMemoryInformation);
-    public async Task<IEnumerable<DiskInformation>> GetDiskInformationAsync() => await Task.Run(GetDiskInformation);
-    public async Task<IEnumerable<NetworkInformation>> GetNetworkInformationAsync() => await Task.Run(GetNetworkInformation);
-    public async Task<IEnumerable<BatteryInformation>> GetBatteryInformationAsync() => await Task.Run(GetBatteryInformation);
+    public async Task<IEnumerable<OSInformation>> GetOSInformationAsync()
+    {
+        return await Task.Run(GetOSInformation);
+    }
+
+    public async Task<IEnumerable<CpuInformation>> GetCpuInformationAsync()
+    {
+        return await Task.Run(GetCpuInformation);
+    }
+
+    public async Task<IEnumerable<GpuInformation>> GetGpuInformationAsync()
+    {
+        return await Task.Run(GetGpuInformation);
+    }
+
+    public async Task<IEnumerable<MemoryInformation>> GetMemoryInformationAsync()
+    {
+        return await Task.Run(GetMemoryInformation);
+    }
+
+    public async Task<IEnumerable<DiskInformation>> GetDiskInformationAsync()
+    {
+        return await Task.Run(GetDiskInformation);
+    }
+
+    public async Task<IEnumerable<NetworkInformation>> GetNetworkInformationAsync()
+    {
+        return await Task.Run(GetNetworkInformation);
+    }
+
+    public async Task<IEnumerable<BatteryInformation>> GetBatteryInformationAsync()
+    {
+        return await Task.Run(GetBatteryInformation);
+    }
 
     public IEnumerable<OSInformation> GetOSInformation()
     {
@@ -40,8 +68,9 @@ public class WmiService
                     LastBootUpTime = $"{os["LastBootUpTime"]}"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
@@ -68,8 +97,9 @@ public class WmiService
                     L3Cache = $"{cpu["L3CacheSize"]} KB"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
@@ -91,8 +121,9 @@ public class WmiService
                     VideoArchitecture = $"{gpu["VideoArchitecture"]}"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
@@ -114,8 +145,9 @@ public class WmiService
                     Manufacturer = $"{mem["Manufacturer"]}"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
@@ -138,8 +170,9 @@ public class WmiService
                     Model = $"{disk["Model"]}"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
@@ -162,8 +195,9 @@ public class WmiService
                     AdapterType = $"{network["AdapterType"]}"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
@@ -185,8 +219,9 @@ public class WmiService
                     Chemistry = $"{b["Chemistry"]}"
                 });
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Log.Error(e.Message);
             return [];
         }
     }
